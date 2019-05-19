@@ -47,7 +47,7 @@ namespace AngleDisplacementObserver
         {
             var selectedPort = portComboBox.SelectedItem.ToString();            
             portComboBox.Enabled = false;
-            SerialPort = new SerialPort(selectedPort, 9600, Parity.None, 8, StopBits.One);
+            SerialPort = new SerialPort(selectedPort, 115200, Parity.None, 8, StopBits.One);
             try
             {
                 if (!SerialPort.IsOpen)
@@ -77,15 +77,17 @@ namespace AngleDisplacementObserver
 
         private void SerialDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            var data = SerialPort.ReadExisting();
+            var data = SerialPort.ReadLine();
+            string formated = data.Replace('.', ',');
             Log($"Received message from {SerialPort.PortName}: {data}");
-            if (float.TryParse(data, out _))
+            if (float.TryParse(formated, out _))
             {
-                angleLabel.Text = data;
+                formated = data.Replace(',', '.');
+                angleLabel.Invoke((MethodInvoker)(() => angleLabel.Text = formated));
             }
             else
             {
-                angleLabel.Text = _defaultAngleValue;
+                angleLabel.Invoke((MethodInvoker)(() => angleLabel.Text = _defaultAngleValue));
             }
             
         }
@@ -94,7 +96,7 @@ namespace AngleDisplacementObserver
         {
             DateTime dt = DateTime.Now;
             string time = dt.ToShortTimeString();
-            logBox.AppendText($"[{time}] {message}\n");
+            logBox.Invoke((MethodInvoker)(() => logBox.AppendText($"[{time}] {message}\n")));
         }
     }
 }
