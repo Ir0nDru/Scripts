@@ -1,0 +1,14 @@
+.\objects\u_uart.o: U_Uart.c
+.\objects\u_uart.o: C:\Keil_v5\ARM\PACK\Keil\MDR1986BExx\1.51\Libraries\MDR32F9Qx_StdPeriph_Driver\inc\MDR32F9Qx_uart.h
+.\objects\u_uart.o: C:\Keil_v5\ARM\PACK\Keil\MDR1986BExx\1.51\Config\MDR32F9Qx_config.h
+.\objects\u_uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\u_uart.o: C:\Keil_v5\ARM\PACK\Keil\MDR1986BExx\1.51\Libraries\CMSIS\CM3\DeviceSupport\MDR32F9Qx\inc\MDR32Fx.h
+.\objects\u_uart.o: C:\Keil_v5\ARM\PACK\Keil\MDR1986BExx\1.51\Libraries\CMSIS\CM3\CoreSupport\core_cm3.h
+.\objects\u_uart.o: C:\Keil_v5\ARM\PACK\Keil\MDR1986BExx\1.51\Libraries\CMSIS\CM3\CoreSupport\core_cmInstr.h
+.\objects\u_uart.o: C:\Keil_v5\ARM\PACK\Keil\MDR1986BExx\1.51\Libraries\CMSIS\CM3\CoreSupport\core_cmFunc.h
+.\objects\u_uart.o: .\RTE\Device\MDR1986BE92\system_MDR32F9Qx.h
+.\objects\u_uart.o: C:\Keil_v5\ARM\PACK\Keil\MDR1986BExx\1.51\Libraries\MDR32F9Qx_StdPeriph_Driver\inc\MDR32F9Qx_lib.h
+.\objects\u_uart.o: C:\Keil_v5\ARM\PACK\Keil\MDR1986BExx\1.51\Libraries\MDR32F9Qx_StdPeriph_Driver\inc\MDR32F9Qx_port.h
+.\objects\u_uart.o: C:\Keil_v5\ARM\PACK\Keil\MDR1986BExx\1.51\Libraries\MDR32F9Qx_StdPeriph_Driver\inc\MDR32F9Qx_rst_clk.h
+.\objects\u_uart.o: U_Uart.h
+.\objects\u_uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
