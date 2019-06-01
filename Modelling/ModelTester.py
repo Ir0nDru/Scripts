@@ -13,20 +13,20 @@ class Application:
         self.build_form()
 
     def load_data(self):
-        try:            
+        try:
+            data = {"leds":{}, "photos":{}, "surfaces":{}}            
             with open("data.json", "r") as read_file:
                 data = json.load(read_file)
         except FileNotFoundError:
-            messagebox.showerror("Error","Data file not found")
-            data = {"leds":{}, "photos":{}}
+            messagebox.showerror("Error","Data file not found")            
         except Exception:
             messagebox.showerror("Error","Failed to load data")
-            data = {"leds":{}, "photos":{}}
-        return data["leds"], data["photos"]        
+        return data["leds"], data["photos"], data["surfaces"]        
 
     def validate_data(self):
         self.selected_led = self.leds[self.ledBox.get()]
         self.selected_photo = self.photos[self.photobox.get()]
+        self.selected_surface_koef = self.surfaces[self.surphaceBox.get()]
         self.minheight = int(self.heightminbox.get())
         self.maxheight = int(self.heightmaxbox.get())
         self.stepheight = int(self.heightstepbox.get())
@@ -68,10 +68,10 @@ class Application:
         hitting_rays = 0
         for ray in led_rays:
             if (max_betta > ray > min_betta):
-                emitting_energy = self.find_koef(ray, b_map) * ray_energy
-                #TODO: add surface energy absorption
+                emitting_energy = self.find_koef(ray, b_map) * ray_energy                
+                reflected_energy = emitting_energy * self.selected_surface_koef
                 kappa = self.find_kappa(alpha, ray)
-                receiving_energy = self.find_koef(kappa, k_map) * emitting_energy
+                receiving_energy = self.find_koef(kappa, k_map) * reflected_energy
                 hitting_rays += receiving_energy
         return(hitting_rays)
             
@@ -120,7 +120,7 @@ class Application:
         tk.Label(text="Select Photodiode:").grid(row=0, column=2, columnspan=2)
 
         #row 1
-        self.leds, self.photos = self.load_data()        
+        self.leds, self.photos, self.surfaces = self.load_data()        
         
         self.ledBox = ttk.Combobox(self.parent, state="readonly", values=list(self.leds.keys()))
         self.ledBox.current(0)
@@ -132,19 +132,24 @@ class Application:
 
         #row 2
         tk.Label(text="Height, mm:").grid(row=2, column=0, columnspan=2)
-        tk.Label(text="Width, mm:").grid(row=2, column=2)        
-        self.widthbox = tk.Spinbox(state="readonly", width=5, from_=1, to=100)
-        self.widthbox.grid(row=2, column=3)
+        tk.Label(text="Select surface:").grid(row=2, column=2, columnspan=2)
 
         #row 3
         tk.Label(text="Min:").grid(row=3, column=0)        
         self.heightminbox = tk.Spinbox(state="readonly", width=5, from_=1, to=100)
         self.heightminbox.grid(row=3, column=1)
 
+        self.surphaceBox = ttk.Combobox(self.parent, state="readonly", values=list(self.surfaces.keys()))
+        self.surphaceBox.current(0)
+        self.surphaceBox.grid(row=3, column=2, columnspan=2, padx=(0,5), pady=2)
+
         #row 4
         tk.Label(text="Max:").grid(row=4, column=0)        
         self.heightmaxbox = tk.Spinbox(state="readonly", width=5, from_=1, to=100)
         self.heightmaxbox.grid(row=4, column=1)
+        tk.Label(text="Width, mm:").grid(row=4, column=2)        
+        self.widthbox = tk.Spinbox(state="readonly", width=5, from_=1, to=100)
+        self.widthbox.grid(row=4, column=3)
 
         #row 5
         tk.Label(text="Steps:").grid(row=5, column=0)        
