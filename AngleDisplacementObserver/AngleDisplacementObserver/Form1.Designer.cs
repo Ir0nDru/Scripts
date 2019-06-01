@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.angleLabel = new System.Windows.Forms.Label();
             this.logBox = new System.Windows.Forms.TextBox();
+            this.testButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // portLabel
@@ -97,11 +98,22 @@
             this.logBox.Size = new System.Drawing.Size(259, 112);
             this.logBox.TabIndex = 5;
             // 
+            // testButton
+            // 
+            this.testButton.Location = new System.Drawing.Point(174, 35);
+            this.testButton.Name = "testButton";
+            this.testButton.Size = new System.Drawing.Size(98, 23);
+            this.testButton.TabIndex = 6;
+            this.testButton.Text = "Test";
+            this.testButton.UseVisualStyleBackColor = true;
+            this.testButton.Click += new System.EventHandler(this.testButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.testButton);
             this.Controls.Add(this.logBox);
             this.Controls.Add(this.angleLabel);
             this.Controls.Add(this.label1);
@@ -128,6 +140,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label angleLabel;
         private System.Windows.Forms.TextBox logBox;
+        private System.Windows.Forms.Button testButton;
     }
 }
 

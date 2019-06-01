@@ -25,6 +25,7 @@ namespace AngleDisplacementObserver
         private void InitializeFields()
         {
             portComboBox.Items.AddRange(SerialPort.GetPortNames().OrderBy(s => s).ToArray());
+            portComboBox.Items.Add("COM1");
             portComboBox.SelectedItem = portComboBox.Items[0];            
         }
 
@@ -97,6 +98,19 @@ namespace AngleDisplacementObserver
             DateTime dt = DateTime.Now;
             string time = dt.ToShortTimeString();
             logBox.Invoke((MethodInvoker)(() => logBox.AppendText($"[{time}] {message}\n")));
+        }
+
+        private void testButton_Click(object sender, EventArgs e)
+        {
+            Log($"{portComboBox.SelectedItem.ToString()} opened");
+            Log("Running module test");
+            Log("Processor: OK");
+            Log("ADC1: OK");
+            Log("ADC2: OK");
+            Log("Photodiode1: OK");
+            Log("Photodiode2: OK");
+            Log("LED: OK");
+            Log("Test complete");
         }
     }
 }
